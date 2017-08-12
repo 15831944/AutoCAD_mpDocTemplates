@@ -1,0 +1,156 @@
+﻿<controls:MetroWindow x:Class="mpDocTemplates.MpDocTemplate"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      mc:Ignorable="d" ShowTitleBar="False" ShowMaxRestoreButton="False" ShowMinButton="False"
+                      WindowStartupLocation="CenterScreen" ResizeMode="NoResize" SizeToContent="WidthAndHeight"
+                      MouseEnter="MpDocTemplate_OnMouseEnter" MouseLeave="MpDocTemplate_OnMouseLeave"
+                      PreviewKeyDown="MpDocTemplate_OnPreviewKeyDown" Loaded="MpDocTemplate_OnLoaded"
+                      Closed="MpDocTemplate_OnClosed" MouseLeftButtonDown="MpDocTemplate_OnMouseLeftButtonDown">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="BtStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource SquareMetroButton}">
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" FontSize="16">ШАБЛОНЫ</Label>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Общие свойства"
+                                   controls:ControlsHelper.HeaderFontSize="16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Название проекта" VerticalAlignment="Center" Margin="2"
+                               Grid.Column="0" Grid.Row="0"></TextBlock>
+                    <TextBox Name="TbDescription" TextWrapping="Wrap" VerticalAlignment="Center"
+                             controls:TextBoxHelper.ClearTextButton="True"
+                             MinWidth="200" MaxWidth="300" Margin="2"
+                             Grid.Column="1" Grid.Row="0"></TextBox>
+                    <TextBlock Text="Номер проекта" VerticalAlignment="Center" Margin="2"
+                               Grid.Column="0" Grid.Row="1"></TextBlock>
+                    <TextBox Name="TbNumProj" TextWrapping="Wrap" VerticalAlignment="Center"
+                             controls:TextBoxHelper.ClearTextButton="True"
+                             MinWidth="200" MaxWidth="300" Margin="2"
+                             Grid.Column="1" Grid.Row="1"></TextBox>
+                    <TextBlock Text="Главный инженер"
+                               VerticalAlignment="Center" Margin="2"
+                               Grid.Column="0" Grid.Row="2"></TextBlock>
+                    <TextBox Name="TbEngineer" TextWrapping="Wrap" VerticalAlignment="Center"
+                             controls:TextBoxHelper.ClearTextButton="True"
+                             MinWidth="200" MaxWidth="300" Margin="2"
+                             Grid.Column="1" Grid.Row="2"></TextBox>
+                    <TextBlock Text="Главный инженер проекта" VerticalAlignment="Center" Margin="2"
+                               Grid.Column="0" Grid.Row="3"></TextBlock>
+                    <TextBox Name="TbGIP" TextWrapping="Wrap" VerticalAlignment="Center"
+                             controls:TextBoxHelper.ClearTextButton="True"
+                             MinWidth="200" MaxWidth="300" Margin="2"
+                             Grid.Column="1" Grid.Row="3"></TextBox>
+                    <TextBlock Text="Выполнил" VerticalAlignment="Center" Margin="2"
+                               Grid.Column="0" Grid.Row="4"></TextBlock>
+                    <TextBox Name="TbEmployer" TextWrapping="Wrap" VerticalAlignment="Center"
+                             controls:TextBoxHelper.ClearTextButton="True"
+                             MinWidth="200" MaxWidth="300" Margin="2"
+                             Grid.Column="1" Grid.Row="4"></TextBox>
+                    <TextBlock Text="Нормоконтроль" VerticalAlignment="Center" Margin="2"
+                               Grid.Column="0" Grid.Row="5"></TextBlock>
+                    <TextBox Name="TbController" TextWrapping="Wrap" VerticalAlignment="Center"
+                             controls:TextBoxHelper.ClearTextButton="True"
+                             MinWidth="200" MaxWidth="300" Margin="2"
+                             Grid.Column="1" Grid.Row="5"></TextBox>
+                    <TextBlock Text="Организация" VerticalAlignment="Center" Margin="2"
+                               Grid.Column="0" Grid.Row="6"></TextBlock>
+                    <TextBox Name="TbOrganization" TextWrapping="Wrap" VerticalAlignment="Center"
+                             controls:TextBoxHelper.ClearTextButton="True"
+                             MinWidth="200" MaxWidth="300" Margin="2"
+                             Grid.Column="1" Grid.Row="6"></TextBox>
+                    <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BtStyle}"
+                            Name="BtGetFromFields" Margin="2" Click="BtGetFromFields_OnClick"
+                            HorizontalAlignment="Center"
+                            ToolTip="Получить данные из полей (см.функцию Штампы)">Взять из полей</Button>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Шаблоны"
+                                   controls:ControlsHelper.HeaderFontSize="16">
+                <TabControl>
+                    <controls:MetroTabItem Header="Объекты кап. стр-ва"
+                                           controls:ControlsHelper.HeaderFontSize="14">
+                        <ListBox Name="LbKap" Margin="2" Height="200"
+                                 BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+                                    <CheckBox Margin="2,2,2,0" IsChecked="{Binding Create}"
+                                              ToolTip="{Binding ToolTip}">
+                                        <CheckBox.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Text, ElementName=TbNumProj}"></TextBlock>
+                                                <TextBlock>-</TextBlock>
+                                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                            </StackPanel>
+                                        </CheckBox.Content>
+                                    </CheckBox>
+                                    <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </controls:MetroTabItem>
+                    <controls:MetroTabItem Header="Линейные объекты"
+                                           controls:ControlsHelper.HeaderFontSize="14">
+                        <ListBox Name="LbLin" Margin="2" Height="200"
+                                 BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+                                    <CheckBox Margin="2,2,2,0" IsChecked="{Binding Create}"
+                                              ToolTip="{Binding ToolTip}">
+                                        <CheckBox.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Text, ElementName=TbNumProj}"></TextBlock>
+                                                <TextBlock>-</TextBlock>
+                                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                            </StackPanel>
+                                        </CheckBox.Content>
+                                    </CheckBox>
+                                    <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </controls:MetroTabItem>
+                </TabControl>
+            </TabItem>
+        </TabControl>
+        <Button Grid.Row="2" HorizontalAlignment="Center"
+                Name="BtCreate" Click="BtCreate_OnClick"
+                Style="{StaticResource BtStyle}" Margin="2">Создать</Button>
+    </Grid>
+</controls:MetroWindow>

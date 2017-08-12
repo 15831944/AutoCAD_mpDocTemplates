@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{538B9B6E-A82D-4AAC-91AF-F428D4673EC4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mpDocTemplates</RootNamespace>
+    <AssemblyName>mpDocTemplates_2015</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\ModPlus_builded\Functions\mpDocTemplates\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;ac2013</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="accoremgd">
+      <HintPath>..\..\..\..\Acad dlls\2015\accoremgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acdbmgd">
+      <HintPath>..\..\..\..\Acad dlls\2015\acdbmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acmgd">
+      <HintPath>..\..\..\..\Acad dlls\2015\acmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\..\..\..\ModPlus_builded\MahApps.Metro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\..\..\..\ModPlus_builded\System.Windows.Interactivity.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\mpDocTemplates_2010\ExportProgressDialog.xaml.cs">
+      <Link>ExportProgressDialog.xaml.cs</Link>
+      <DependentUpon>ExportProgressDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\mpDocTemplates_2010\MpDocTemplate.xaml.cs">
+      <Link>MpDocTemplate.xaml.cs</Link>
+      <DependentUpon>MpDocTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\mpDocTemplates_2010\WordAutomation.cs">
+      <Link>WordAutomation.cs</Link>
+    </Compile>
+    <Compile Include="Interface.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MpDocTemplates_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MpDocTemplates_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\AutoCAD Modules\ModPlus_2015\ModPlus_2015.csproj">
+      <Project>{fa70d61d-f8bc-433f-9aae-7d5f2570cdaf}</Project>
+      <Name>ModPlus_2015</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\mpExWin\mpMsg.csproj">
+      <Project>{cb3b96a0-57c2-44c5-af59-5cec27da599e}</Project>
+      <Name>mpMsg</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\mpPInterface\mpPInterface.csproj">
+      <Project>{769afe8c-728a-49df-acde-325a961b809f}</Project>
+      <Name>mpPInterface</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\mpSettings\mpSettings.csproj">
+      <Project>{04f6a42c-3492-4430-a0f1-5ddfcea0fddd}</Project>
+      <Name>mpSettings</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\mpDocTemplates_2010\ExportProgressDialog.xaml">
+      <Link>ExportProgressDialog.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\mpDocTemplates_2010\MpDocTemplate.xaml">
+      <Link>MpDocTemplate.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\В.docx">
+      <Link>Resources\Kap\В.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ГС.docx">
+      <Link>Resources\Kap\ГС.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\К.docx">
+      <Link>Resources\Kap\К.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\КР.docx">
+      <Link>Resources\Kap\КР.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ОВ.docx">
+      <Link>Resources\Kap\ОВ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ОДИ.docx">
+      <Link>Resources\Kap\ОДИ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ООС.docx">
+      <Link>Resources\Kap\ООС.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ПБ.docx">
+      <Link>Resources\Kap\ПБ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ПЗ.docx">
+      <Link>Resources\Kap\ПЗ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ПЗУ.docx">
+      <Link>Resources\Kap\ПЗУ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ПОД.docx">
+      <Link>Resources\Kap\ПОД.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ПОС.docx">
+      <Link>Resources\Kap\ПОС.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\СМ.docx">
+      <Link>Resources\Kap\СМ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\СС.docx">
+      <Link>Resources\Kap\СС.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ТХ.docx">
+      <Link>Resources\Kap\ТХ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ЭОМ.docx">
+      <Link>Resources\Kap\ЭОМ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\ЭЭ.docx">
+      <Link>Resources\Kap\ЭЭ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Lin\ИЛО.docx">
+      <Link>Resources\Lin\ИЛО.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Lin\ООС.docx">
+      <Link>Resources\Lin\ООС.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Lin\ПБ.docx">
+      <Link>Resources\Lin\ПБ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Lin\ПЗ.docx">
+      <Link>Resources\Lin\ПЗ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Lin\ПОД.docx">
+      <Link>Resources\Lin\ПОД.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Lin\ПОС.docx">
+      <Link>Resources\Lin\ПОС.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Lin\ППО.docx">
+      <Link>Resources\Lin\ППО.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Lin\СМ.docx">
+      <Link>Resources\Lin\СМ.docx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Lin\ТКР.docx">
+      <Link>Resources\Lin\ТКР.docx</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpDocTemplates_2010\Resources\Kap\АР.docx">
+      <Link>Resources\Kap\АР.docx</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

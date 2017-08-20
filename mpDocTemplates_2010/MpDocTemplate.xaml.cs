@@ -7,20 +7,24 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Internal;
 using Autodesk.AutoCAD.Runtime;
-using mpMsg;
-using mpSettings;
-using ModPlus;
 using System.Globalization;
 using Visibility = System.Windows.Visibility;
 using System.IO;
 using System.Reflection;
 using System.Linq;
+using System.Threading;
+using ModPlusAPI;
+using ModPlusAPI.IO.Office.Word;
+using ModPlusAPI.IO.Office.Word.FindAndReplace;
+using ModPlusAPI.Windows;
+using ModPlusAPI.Windows.Helpers;
 
 namespace mpDocTemplates
 {
@@ -47,12 +51,7 @@ namespace mpDocTemplates
         public MpDocTemplate()
         {
             InitializeComponent();
-            MpWindowHelpers.OnWindowStartUp(
-                this,
-                MpSettings.GetValue("Settings", "MainSet", "Theme"),
-                MpSettings.GetValue("Settings", "MainSet", "AccentColor"),
-                MpSettings.GetValue("Settings", "MainSet", "BordersType")
-                );
+            this.OnWindowStartUp();
         }
         #region windows standard
         private void MpDocTemplate_OnMouseEnter(object sender, MouseEventArgs e)
@@ -88,12 +87,14 @@ namespace mpDocTemplates
                     TbEngineer,
                     TbGIP,
                     TbNumProj,
-                    TbOrganization
+                    TbOrganization,
+                    TbResolution,
+                    TbCustomer
                 };
                 // Данные из файла настроек
                 foreach (var tb in _textBoxes)
                 {
-                    tb.Text = MpSettings.GetValue("Settings", "mpDocTemplates", tb.Name);
+                    tb.Text = UserConfigFile.GetValue(UserConfigFile.ConfigFileZone.Settings, "mpDocTemplates", tb.Name);
                 }
                 // Создаем новые коллекции, заполняем и биндим их
                 _kapDocs = new ObservableCollection<TemplateItem>();
@@ -105,7 +106,7 @@ namespace mpDocTemplates
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
         // Окно закрылось
@@ -118,14 +119,14 @@ namespace mpDocTemplates
                 {
                     foreach (var tb in _textBoxes)
                     {
-                        MpSettings.SetValue("Settings", "mpDocTemplates", tb.Name, tb.Text, false);
+                        UserConfigFile.SetValue(UserConfigFile.ConfigFileZone.Settings, "mpDocTemplates", tb.Name, tb.Text, false);
                     }
-                    MpSettings.SaveFile();
+                    UserConfigFile.SaveConfigFile();
                 }
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
         // Взять из полей
@@ -135,7 +136,7 @@ namespace mpDocTemplates
             {
                 var dbsi = AcApp.DocumentManager.MdiActiveDocument.Database.SummaryInfo;
                 var dbsib = new DatabaseSummaryInfoBuilder(dbsi);
-                for (var i = 0; i < _textBoxes.Count; i++)
+                for (var i = 0; i < _fieldNames.Count; i++)
                 {
                     if (dbsib.CustomPropertyTable.Contains(_fieldNames[i]))
                         _textBoxes[i].Text = dbsib.CustomPropertyTable[_fieldNames[i]].ToString();
@@ -143,7 +144,7 @@ namespace mpDocTemplates
             }
             catch (System.Exception exception)
             {
-                MpExWin.Show(exception);
+                ExceptionBox.Show(exception);
             }
         }
 
@@ -157,7 +158,7 @@ namespace mpDocTemplates
             _fileToDelete = new List<string>(); // Список файлов на удаление
             if (!_kapDocs.Any(x => x.Create) & !_linDocs.Any(x => x.Create))
             {
-                MpMsgWin.Show("Вы не указали ни одного шаблона для создания");
+                ModPlusAPI.Windows.MessageBox.Show("Вы не указали ни одного шаблона для создания");
                 return;
             }
             // Значения в текстовых полях в порядке поиска и замены
@@ -168,7 +169,7 @@ namespace mpDocTemplates
                 TbEmployer.Text.Split(' ').GetValue(0).ToString(),
                 DateTime.Now.Year.ToString(CultureInfo.InvariantCulture) + " г.",
                 TbNumProj.Text, TbController.Text.Split(' ').GetValue(0).ToString(),
-                TbOrganization.Text
+                TbOrganization.Text, TbResolution.Text, TbCustomer.Text
             };
             // Запускаем ProgressDialog
             var dialogProgress = new ExportProgressDialog(
@@ -180,15 +181,15 @@ namespace mpDocTemplates
             };
             dialogProgress.ShowDialog();
             // Если была ошибка
-            if(_hasError & _error != null)
-                MpExWin.Show(_error);
+            if (_hasError & _error != null)
+                ExceptionBox.Show(_error);
             // Удаляем файлы
-            if(_fileToDelete.Any())
+            if (_fileToDelete.Any())
                 foreach (var file in _fileToDelete)
                 {
                     try
                     {
-                        if(File.Exists(file))
+                        if (File.Exists(file))
                             File.Delete(file);
                     }
                     catch
@@ -207,16 +208,22 @@ namespace mpDocTemplates
                 "<Description>",
                 "<GIP>", "<Engineer>",
                 "<Employer>", "<Year>",
-                "<NumProj>", "<Controller>","<Organization>"
+                "<NumProj>", "<Controller>","<Organization>",
+                "<Resolution>", "<Customer>"
             };
             var assembly = Assembly.GetExecutingAssembly();
+            worker?.ReportProgress(0,"Открытие приложения Word");
             var wordAutomation = new WordAutomation();
             // Запускаем Word
             wordAutomation.CreateWordApplication();
             // Проходим по объектам kap
             foreach (var kapDoc in _kapDocs.Where(x => x.Create))
             {
-                if (worker != null && worker.CancellationPending) { wordAutomation.CloseWordApp(); break;}
+                if (worker != null && worker.CancellationPending)
+                {
+                    wordAutomation.CloseWordApp();
+                    break;
+                }
                 worker?.ReportProgress(0, "Создание шаблона: Объекты кап. стр-ва: " + kapDoc.Name);
                 // Временный файл
                 var tmp = Path.GetTempFileName();
@@ -224,24 +231,33 @@ namespace mpDocTemplates
                 // Имя внедренного ресурса
                 var resourceName = "mpDocTemplates.Resources.Kap." + kapDoc.Name + ".docx";
                 // Читаем ресурс в поток и сохраняем как временный файл
-                using (var stream = assembly.GetManifestResourceStream(resourceName))
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 {
                     SaveStreamToFile(templateFullPath, stream);
                 }
                 try
                 {
-                    // Создаем документ, используя временный файл
-                    wordAutomation.CreateWordDoc(templateFullPath, false);
-                    // Помещяем в список на удаление
-                    _fileToDelete?.Add(tmp);
-                    _fileToDelete?.Add(templateFullPath);
-                    for (var i = 0; i < toFind.Count; i++)
+                    using (FlatDocument flatDocument = new FlatDocument(templateFullPath))
                     {
-                        if (worker != null && worker.CancellationPending) { wordAutomation.CloseWordApp(); break; }
-                        worker?.ReportProgress(Convert.ToInt32(((decimal)i / toFind.Count) * 100),
-                            "Создание шаблона: Объекты кап. стр-ва: " + kapDoc.Name);
-                        wordAutomation.FindReplace(toFind[i], _toReplace[i]);
+                        // Помещяем в список на удаление
+                        _fileToDelete?.Add(tmp);
+                        _fileToDelete?.Add(templateFullPath);
+                        for (var i = 0; i < toFind.Count; i++)
+                        {
+                            if (worker != null && worker.CancellationPending)
+                            {
+                                wordAutomation.CloseWordApp();
+                                break;
+                            }
+                            worker?.ReportProgress(Convert.ToInt32(((decimal)i / toFind.Count) * 100),
+                                "Создание шаблона: Объекты кап. стр-ва: " + kapDoc.Name);
+                            flatDocument.FindAndReplace(toFind[i], _toReplace[i]);
+                            Thread.Sleep(50);
+                        }
                     }
+                    // Создаем документ, используя временный файл
+                    worker?.ReportProgress(0, "Открытие файла Word: Объекты кап. стр-ва: " + kapDoc.Name);
+                    wordAutomation.CreateWordDoc(templateFullPath, true);
                 }
                 catch (System.Exception exception)
                 {
@@ -254,7 +270,11 @@ namespace mpDocTemplates
             // Проходим по объектам Лин
             foreach (var linDoc in _linDocs.Where(x => x.Create))
             {
-                if (worker != null && worker.CancellationPending) { wordAutomation.CloseWordApp(); break; }
+                if (worker != null && worker.CancellationPending)
+                {
+                    wordAutomation.CloseWordApp();
+                    break;
+                }
                 worker?.ReportProgress(0, "Создание шаблона: Линейные объекты: " + linDoc.Name);
                 // Временный файл
                 var tmp = Path.GetTempFileName();
@@ -268,18 +288,27 @@ namespace mpDocTemplates
                 }
                 try
                 {
-                    // Создаем документ, используя временный файл
-                    wordAutomation.CreateWordDoc(templateFullPath, false);
-                    // Помещяем в список на удаление
-                    _fileToDelete?.Add(tmp);
-                    _fileToDelete?.Add(templateFullPath);
-                    for (var i = 0; i < toFind.Count; i++)
+                    using (FlatDocument flatDocument = new FlatDocument(templateFullPath))
                     {
-                        if (worker != null && worker.CancellationPending) { wordAutomation.CloseWordApp(); break; }
-                        worker?.ReportProgress(Convert.ToInt32(((decimal)i / toFind.Count) * 100),
-                            "Создание шаблона: Линейные объекты: " + linDoc.Name);
-                        wordAutomation.FindReplace(toFind[i], _toReplace[i]);
+                        // Помещяем в список на удаление
+                        _fileToDelete?.Add(tmp);
+                        _fileToDelete?.Add(templateFullPath);
+                        for (var i = 0; i < toFind.Count; i++)
+                        {
+                            if (worker != null && worker.CancellationPending)
+                            {
+                                wordAutomation.CloseWordApp();
+                                break;
+                            }
+                            worker?.ReportProgress(Convert.ToInt32(((decimal) i / toFind.Count) * 100),
+                                "Создание шаблона: Линейные объекты: " + linDoc.Name);
+                            flatDocument.FindAndReplace(toFind[i], _toReplace[i]);
+                            Thread.Sleep(50);
+                        }
                     }
+                    // Создаем документ, используя временный файл
+                    worker?.ReportProgress(0, "Открытие файла Word: Линейные объекты: " + linDoc.Name);
+                    wordAutomation.CreateWordDoc(templateFullPath, true);
                 }
                 catch (System.Exception exception)
                 {
@@ -289,8 +318,10 @@ namespace mpDocTemplates
                     _hasError = true;
                 }
             }
+            // Делаем word видимым
             wordAutomation.MakeWordAppVisible();
         }
+
         private static void SaveStreamToFile(string fileFullPath, Stream stream)
         {
             if (stream.Length == 0) return;
@@ -359,7 +390,7 @@ namespace mpDocTemplates
         }
         static readonly List<string> KapNames = new List<string>
         {
-            "ПЗ","ПЗУ","АР","КР","ЭОМ","В","К","ОВ","СС","ГС","ТХ","ПОС","ПОД","ООС","ПБ","ОДИ","ЭЭ","СМ"
+            "ПЗ","ПЗУ","АР","КР","ЭОМ","В","К","ОВ","СС","ГС","ТХ","ПОС","ПОД","ООС","ПБ","ОДИ","ТБЭ","СМ","ЭЭ"
         };
         static readonly List<string> KapToolTips = new List<string>
         {
@@ -375,23 +406,43 @@ namespace mpDocTemplates
             "Система газоснабжения",
             "Технологические решения",
             "Проект организации строительства",
-            "Проект организации работ по сносу или демонтажу&#x0a;объектов капиатльного строительства",
+            "Проект организации работ по сносу или демонтажу" + Environment.NewLine +
+            "объектов капиатльного строительства",
             "Перечень мероприятий по охране окружающей среды",
             "Мероприятия по обеспечению пожарной безопасности",
             "Мероприятия по обеспечению доступа инвалидов",
-            "Перечень мероприятий по обеспечению соблюдения требований&#x0a;энергетической эффективности и требований оснащенности зданий, строений,&#x0a;сооружений приборами учета используемых энергетических ресурсов",
-            "Смета на строительство объектов капитального строительства"
+            "Требования к обеспечению безопасной эксплуатации объектов капитального строительства",
+            "Смета на строительство объектов капитального строительства",
+            "Перечень мероприятий по обеспечению соблюдения требований"+ Environment.NewLine +
+            "энергетической эффективности и требований оснащенности зданий, строений,"+ Environment.NewLine +
+            "сооружений приборами учета используемых энергетических ресурсов"
         };
         static readonly List<string> LinNames = new List<string>
         {
-            "ПЗ","ППО","ТКР","ИЛО","ПОС","ПОД","ООС","ПБ","СМ"
+            "ПЗ","ППО",
+            "ТКР (автомобильные дороги)",
+            "ТКР (железные дороги)",
+            "ТКР (метрополитен)",
+            "ТКР (линии связи)",
+            "ТКР (магистральные трубопроводы)",
+            "ИЛО","ПОС","ПОД","ООС","ПБ","СМ"
         };
         static readonly List<string> LinToolTips = new List<string>
         {
             "Пояснительная записка",
             "Проект полосы отвода",
-            "Технологические и конструктивные решения линейного&#x0a;объекта. Искусственные сооружения",
-            "Здания, строения и сооружения, входящие в&#x0a;инфраструктуру линейного объекта",
+            "Технологические и конструктивные решения линейного"+ Environment.NewLine +
+            "объекта. Искусственные сооружения",
+            "Технологические и конструктивные решения линейного"+ Environment.NewLine +
+            "объекта. Искусственные сооружения",
+            "Технологические и конструктивные решения линейного"+ Environment.NewLine +
+            "объекта. Искусственные сооружения",
+            "Технологические и конструктивные решения линейного"+ Environment.NewLine +
+            "объекта. Искусственные сооружения",
+            "Технологические и конструктивные решения линейного"+ Environment.NewLine +
+            "объекта. Искусственные сооружения",
+            "Здания, строения и сооружения, входящие в"+ Environment.NewLine +
+            "инфраструктуру линейного объекта",
             "Проект организации строительства",
             "Проект организации работ по сносу (демонтажу) линейного объекта",
             "Мероприятия по охране окружающей среды",

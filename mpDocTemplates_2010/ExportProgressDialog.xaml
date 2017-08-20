@@ -6,21 +6,12 @@
                       ShowMaxRestoreButton="False" ShowMinButton="False" ShowCloseButton="False"
                       ShowInTaskbar="False" ShowTitleBar="False"
                       SizeToContent="WidthAndHeight" ResizeMode="NoResize"
-                      Loaded="ExportProgressDialog_OnLoaded">
+                      Loaded="ExportProgressDialog_OnLoaded" MinWidth="400">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ModPlusAPI;component/Windows/WinResources/Styles.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-            <!-- ReSharper disable once Xaml.StaticResourceNotResolved -->
-            <Style x:Key="BtStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource SquareMetroButton}">
-                <Setter Property="BorderThickness" Value="1" />
-            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="2">
@@ -37,7 +28,7 @@
         <controls:ProgressRing Grid.Row="2" IsActive="True" Foreground="{DynamicResource AccentColorBrush}" Margin="5"
                                Name="ProgressRing"></controls:ProgressRing>
         <controls:MetroProgressBar Grid.Row="2" Margin="5" Name="ProgressBar" Visibility="Collapsed"></controls:MetroProgressBar>
-        <Button Grid.Row="3" Name="BtCancel" Content="Отмена" Style="{StaticResource BtStyle}" HorizontalAlignment="Stretch"
+        <Button Grid.Row="3" Name="BtCancel" Content="Отмена" HorizontalAlignment="Stretch"
                 Margin="2" Click="BtCancel_OnClick"></Button>
     </Grid>
 </controls:MetroWindow>

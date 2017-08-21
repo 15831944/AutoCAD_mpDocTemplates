@@ -460,6 +460,8 @@ namespace mpDocTemplates
         [CommandMethod("ModPlus", "mpDocTemplates", CommandFlags.Modal)]
         public void StartFunction()
         {
+            Statistic.SendCommandStarting(new Interface());
+
             if (_mpDocTemplate == null)
             {
                 _mpDocTemplate = new MpDocTemplate();

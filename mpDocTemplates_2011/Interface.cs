@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ModPlusAPI.Interfaces;
 
 namespace mpDocTemplates
@@ -8,7 +9,9 @@ namespace mpDocTemplates
         public SupportedProduct SupportedProduct => SupportedProduct.AutoCAD;
         public string Name => "mpDocTemplates";
         public string AvailProductExternalVersion => "2011";
-        public string ClassName => string.Empty;
+        public string FullClassName => string.Empty;
+        public string AppFullClassName => string.Empty;
+        public Guid AddInId => Guid.Empty;
         public string LName => "Шаблоны. Стадия П";
         public string Description => "Функция позволяет создавать шаблоны текстовой части раздела согласно \"Постановление РФ №87\" с титульным листом согласно ГОСТ Р 21.1101-2013";
         public string Author => "Пекшев Александр aka Modis";

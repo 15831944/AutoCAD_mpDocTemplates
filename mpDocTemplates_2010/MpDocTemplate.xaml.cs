@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -28,11 +27,10 @@ using ModPlusAPI.Windows.Helpers;
 
 namespace mpDocTemplates
 {
-    /// <summary>
-    /// Логика взаимодействия для MpDocTemplate.xaml
-    /// </summary>
     public partial class MpDocTemplate
     {
+        private const string LangItem = "mpDocTemplates";
+
         private ObservableCollection<TemplateItem> _kapDocs;
         private ObservableCollection<TemplateItem> _linDocs;
         private List<TextBox> _textBoxes;
@@ -53,7 +51,9 @@ namespace mpDocTemplates
             InitializeComponent();
             this.OnWindowStartUp();
         }
+
         #region windows standard
+
         private void MpDocTemplate_OnMouseEnter(object sender, MouseEventArgs e)
         {
             Focus();
@@ -73,7 +73,9 @@ namespace mpDocTemplates
         {
             DragMove();
         }
+
         #endregion
+
         // Окно загрузилось
         private void MpDocTemplate_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -158,7 +160,7 @@ namespace mpDocTemplates
             _fileToDelete = new List<string>(); // Список файлов на удаление
             if (!_kapDocs.Any(x => x.Create) & !_linDocs.Any(x => x.Create))
             {
-                ModPlusAPI.Windows.MessageBox.Show("Вы не указали ни одного шаблона для создания");
+                ModPlusAPI.Windows.MessageBox.Show(ModPlusAPI.Language.GetItem(LangItem, "h19"));
                 return;
             }
             // Значения в текстовых полях в порядке поиска и замены
@@ -173,7 +175,7 @@ namespace mpDocTemplates
             };
             // Запускаем ProgressDialog
             var dialogProgress = new ExportProgressDialog(
-                "Создание шаблонов",
+                ModPlusAPI.Language.GetItem(LangItem, "h20"),
                 CreateTemplates)
             {
                 Topmost = true,
@@ -212,7 +214,7 @@ namespace mpDocTemplates
                 "<Resolution>", "<Customer>"
             };
             var assembly = Assembly.GetExecutingAssembly();
-            worker?.ReportProgress(0,"Открытие приложения Word");
+            worker?.ReportProgress(0, ModPlusAPI.Language.GetItem(LangItem, "h21"));
             var wordAutomation = new WordAutomation();
             // Запускаем Word
             wordAutomation.CreateWordApplication();
@@ -224,7 +226,7 @@ namespace mpDocTemplates
                     wordAutomation.CloseWordApp();
                     break;
                 }
-                worker?.ReportProgress(0, "Создание шаблона: Объекты кап. стр-ва: " + kapDoc.Name);
+                worker?.ReportProgress(0, ModPlusAPI.Language.GetItem(LangItem, "h22") + ": " + ModPlusAPI.Language.GetItem(LangItem, "h15") + ": " + kapDoc.Name);
                 // Временный файл
                 var tmp = Path.GetTempFileName();
                 var templateFullPath = Path.ChangeExtension(tmp, ".docx");
@@ -250,13 +252,14 @@ namespace mpDocTemplates
                                 break;
                             }
                             worker?.ReportProgress(Convert.ToInt32(((decimal)i / toFind.Count) * 100),
-                                "Создание шаблона: Объекты кап. стр-ва: " + kapDoc.Name);
+                                ModPlusAPI.Language.GetItem(LangItem, "h22") + ": " + ModPlusAPI.Language.GetItem(LangItem, "h15") + ": " + kapDoc.Name);
                             flatDocument.FindAndReplace(toFind[i], _toReplace[i]);
                             Thread.Sleep(50);
                         }
                     }
                     // Создаем документ, используя временный файл
-                    worker?.ReportProgress(0, "Открытие файла Word: Объекты кап. стр-ва: " + kapDoc.Name);
+                    worker?.ReportProgress(0, 
+                        ModPlusAPI.Language.GetItem(LangItem, "h23") + ": " + ModPlusAPI.Language.GetItem(LangItem, "h15") + ": " + kapDoc.Name);
                     wordAutomation.CreateWordDoc(templateFullPath, true);
                 }
                 catch (System.Exception exception)
@@ -275,7 +278,8 @@ namespace mpDocTemplates
                     wordAutomation.CloseWordApp();
                     break;
                 }
-                worker?.ReportProgress(0, "Создание шаблона: Линейные объекты: " + linDoc.Name);
+                worker?.ReportProgress(0,
+                    ModPlusAPI.Language.GetItem(LangItem, "h22") + ": " + ModPlusAPI.Language.GetItem(LangItem, "h16") + ": " + linDoc.Name);
                 // Временный файл
                 var tmp = Path.GetTempFileName();
                 var templateFullPath = Path.ChangeExtension(tmp, ".docx");
@@ -300,14 +304,15 @@ namespace mpDocTemplates
                                 wordAutomation.CloseWordApp();
                                 break;
                             }
-                            worker?.ReportProgress(Convert.ToInt32(((decimal) i / toFind.Count) * 100),
-                                "Создание шаблона: Линейные объекты: " + linDoc.Name);
+                            worker?.ReportProgress(Convert.ToInt32(((decimal)i / toFind.Count) * 100),
+                                ModPlusAPI.Language.GetItem(LangItem, "h22") + ": " + ModPlusAPI.Language.GetItem(LangItem, "h16") + ": " + linDoc.Name);
                             flatDocument.FindAndReplace(toFind[i], _toReplace[i]);
                             Thread.Sleep(50);
                         }
                     }
                     // Создаем документ, используя временный файл
-                    worker?.ReportProgress(0, "Открытие файла Word: Линейные объекты: " + linDoc.Name);
+                    worker?.ReportProgress(0,
+                        ModPlusAPI.Language.GetItem(LangItem, "h23") + ": " + ModPlusAPI.Language.GetItem(LangItem, "h16") + ": " + linDoc.Name);
                     wordAutomation.CreateWordDoc(templateFullPath, true);
                 }
                 catch (System.Exception exception)
@@ -342,7 +347,7 @@ namespace mpDocTemplates
     /// Класс описывает один элемент в списке шаблонов
     /// Имеет имя, описание и параметр Создавать или нет
     /// </summary>
-    class TemplateItem
+    internal class TemplateItem
     {
         /// <summary>
         /// Имя шаблона
@@ -357,10 +362,8 @@ namespace mpDocTemplates
         /// </summary>
         public string ToolTip { get; set; }
     }
-    /// <summary>
-    /// Постоянные значения
-    /// </summary>
-    static class TemplateData
+    /// <summary>Постоянные значения</summary>
+    internal static class TemplateData
     {
         public static void FillKapItems(ObservableCollection<TemplateItem> col)
         {
@@ -450,9 +453,7 @@ namespace mpDocTemplates
             "Смета на строительство"
         };
     }
-    /// <summary>
-    /// Запуск функции в автокаде
-    /// </summary>
+    /// <summary>Запуск функции в автокаде</summary>
     public class AcadFunction
     {
         MpDocTemplate _mpDocTemplate;
@@ -465,7 +466,7 @@ namespace mpDocTemplates
             if (_mpDocTemplate == null)
             {
                 _mpDocTemplate = new MpDocTemplate();
-                _mpDocTemplate.Closed += window_Closed;
+                _mpDocTemplate.Closed += Window_Closed;
             }
             if (_mpDocTemplate.IsLoaded)
                 _mpDocTemplate.Activate();
@@ -473,7 +474,8 @@ namespace mpDocTemplates
                 AcApp.ShowModalWindow(
                     AcApp.MainWindow.Handle, _mpDocTemplate);
         }
-        void window_Closed(object sender, EventArgs e)
+
+        private void Window_Closed(object sender, EventArgs e)
         {
             _mpDocTemplate = null;
         }

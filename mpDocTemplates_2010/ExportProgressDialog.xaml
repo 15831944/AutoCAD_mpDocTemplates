@@ -1,9 +1,9 @@
-﻿<controls:MetroWindow x:Class="mpDocTemplates.ExportProgressDialog"
+﻿<mpc:BaseMetroWindow x:Class="mpDocTemplates.ExportProgressDialog"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      WindowStyle="None" WindowStartupLocation="CenterScreen"
-                      ShowMaxRestoreButton="False" ShowMinButton="False" ShowCloseButton="False"
+                      xmlns:mpc="clr-namespace:ModPlusAPI.Windows.Mpc;assembly=ModPlusAPI"
+                      TitlebarHeight="0" ShowCloseButton="False"
                       ShowInTaskbar="False" ShowTitleBar="False"
                       SizeToContent="WidthAndHeight" ResizeMode="NoResize"
                       Loaded="ExportProgressDialog_OnLoaded" MinWidth="400">
@@ -39,4 +39,5 @@
                 HorizontalAlignment="Stretch"
                 Margin="2" Click="BtCancel_OnClick"></Button>
     </Grid>
-</controls:MetroWindow>
+</mpc:BaseMetroWindow>
+

@@ -23,7 +23,6 @@ using ModPlusAPI;
 using ModPlusAPI.IO.Office.Word;
 using ModPlusAPI.IO.Office.Word.FindAndReplace;
 using ModPlusAPI.Windows;
-using ModPlusAPI.Windows.Helpers;
 
 namespace mpDocTemplates
 {
@@ -49,7 +48,7 @@ namespace mpDocTemplates
         public MpDocTemplate()
         {
             InitializeComponent();
-            this.OnWindowStartUp();
+            Title = ModPlusAPI.Language.GetItem(LangItem, "h1");
         }
 
         #region windows standard
@@ -68,12 +67,7 @@ namespace mpDocTemplates
         {
             if (e.Key == Key.Escape) Close();
         }
-
-        private void MpDocTemplate_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
+        
         #endregion
 
         // Окно загрузилось

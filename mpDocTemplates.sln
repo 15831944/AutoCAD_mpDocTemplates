@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpDocTemplates_2010", "mpDocTemplates_2010\mpDocTemplates_2010.csproj", "{4AFE22ED-799F-4ED7-A9AE-A54EABAF63AB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpDocTemplates_2011", "mpDocTemplates_2011\mpDocTemplates_2011.csproj", "{043D992F-BD89-46C5-A5E9-A21C156E8C73}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpDocTemplates_2012", "mpDocTemplates_2012\mpDocTemplates_2012.csproj", "{734504A3-6A7B-433E-8DD8-5A5104DBF03E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpDocTemplates_2013", "mpDocTemplates_2013\mpDocTemplates_2013.csproj", "{52806EB9-A3B5-483C-8A78-7FAF12340529}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpDocTemplates_2014", "mpDocTemplates_2014\mpDocTemplates_2014.csproj", "{A38CCC84-52FF-4536-B983-6FC75570F154}"
@@ -29,18 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4AFE22ED-799F-4ED7-A9AE-A54EABAF63AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AFE22ED-799F-4ED7-A9AE-A54EABAF63AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AFE22ED-799F-4ED7-A9AE-A54EABAF63AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AFE22ED-799F-4ED7-A9AE-A54EABAF63AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{043D992F-BD89-46C5-A5E9-A21C156E8C73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{043D992F-BD89-46C5-A5E9-A21C156E8C73}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{043D992F-BD89-46C5-A5E9-A21C156E8C73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{043D992F-BD89-46C5-A5E9-A21C156E8C73}.Release|Any CPU.Build.0 = Release|Any CPU
-		{734504A3-6A7B-433E-8DD8-5A5104DBF03E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{734504A3-6A7B-433E-8DD8-5A5104DBF03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{734504A3-6A7B-433E-8DD8-5A5104DBF03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{734504A3-6A7B-433E-8DD8-5A5104DBF03E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52806EB9-A3B5-483C-8A78-7FAF12340529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{52806EB9-A3B5-483C-8A78-7FAF12340529}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52806EB9-A3B5-483C-8A78-7FAF12340529}.Release|Any CPU.ActiveCfg = Release|Any CPU

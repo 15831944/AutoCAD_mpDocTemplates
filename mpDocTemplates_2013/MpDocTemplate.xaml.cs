@@ -1,8 +1,4 @@
-﻿#if ac2010
-using AcApp = Autodesk.AutoCAD.ApplicationServices.Application;
-#elif ac2013
-using AcApp = Autodesk.AutoCAD.ApplicationServices.Core.Application;
-#endif
+﻿using AcApp = Autodesk.AutoCAD.ApplicationServices.Core.Application;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -61,11 +57,6 @@ namespace mpDocTemplates
         private void MpDocTemplate_OnMouseLeave(object sender, MouseEventArgs e)
         {
             Utils.SetFocusToDwgView();
-        }
-
-        private void MpDocTemplate_OnPreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape) Close();
         }
         
         #endregion
@@ -235,7 +226,7 @@ namespace mpDocTemplates
                 {
                     using (FlatDocument flatDocument = new FlatDocument(templateFullPath))
                     {
-                        // Помещяем в список на удаление
+                        // Помещаем в список на удаление
                         _fileToDelete?.Add(tmp);
                         _fileToDelete?.Add(templateFullPath);
                         for (var i = 0; i < toFind.Count; i++)
@@ -288,7 +279,7 @@ namespace mpDocTemplates
                 {
                     using (FlatDocument flatDocument = new FlatDocument(templateFullPath))
                     {
-                        // Помещяем в список на удаление
+                        // Помещаем в список на удаление
                         _fileToDelete?.Add(tmp);
                         _fileToDelete?.Add(templateFullPath);
                         for (var i = 0; i < toFind.Count; i++)

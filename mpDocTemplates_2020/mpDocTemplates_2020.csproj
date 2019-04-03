@@ -4,20 +4,21 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F7D34DB3-69E2-4677-8AB7-30FABE4A4AA3}</ProjectGuid>
+    <ProjectGuid>{C4A12D9E-EF52-4A4F-9566-08932D26601C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>mpDocTemplates</RootNamespace>
-    <AssemblyName>mpDocTemplates_2019</AssemblyName>
+    <AssemblyName>mpDocTemplates_2020</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;A2019</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;A2020</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -25,21 +26,22 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;A2019</DefineConstants>
+    <DefineConstants>TRACE;A2020</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
-      <HintPath>C:\_Acad dlls\2019\accoremgd.dll</HintPath>
+      <HintPath>C:\_Acad dlls\2020\accoremgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acdbmgd">
-      <HintPath>C:\_Acad dlls\2019\acdbmgd.dll</HintPath>
+      <HintPath>C:\_Acad dlls\2020\acdbmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="acmgd">
-      <HintPath>C:\_Acad dlls\2019\acmgd.dll</HintPath>
+      <HintPath>C:\_Acad dlls\2020\acmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ModPlusAPI">
@@ -50,31 +52,15 @@
       <HintPath>..\..\..\..\..\..\..\ModPlus\Extensions\ModPlusStyle.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ModPlus_2019">
-      <HintPath>..\..\..\..\..\..\..\ModPlus\Extensions\ModPlus_2019.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <!--
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
-	-->
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="..\mpDocTemplates_2013\ExportProgressDialog.xaml.cs">
       <Link>ExportProgressDialog.xaml.cs</Link>
@@ -92,104 +78,184 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\АР.docx">
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\АР.docx">
       <Link>Resources\Kap\АР.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\В.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\В.docx">
       <Link>Resources\Kap\В.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ГС.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ГС.docx">
       <Link>Resources\Kap\ГС.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\К.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\К.docx">
       <Link>Resources\Kap\К.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\КР.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\КР.docx">
       <Link>Resources\Kap\КР.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ОВ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ОВ.docx">
       <Link>Resources\Kap\ОВ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ОДИ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ОДИ.docx">
       <Link>Resources\Kap\ОДИ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ООС.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ООС.docx">
       <Link>Resources\Kap\ООС.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ПБ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ПБ.docx">
       <Link>Resources\Kap\ПБ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ПЗ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ПЗ.docx">
       <Link>Resources\Kap\ПЗ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ПЗУ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ПЗУ.docx">
       <Link>Resources\Kap\ПЗУ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ПОД.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ПОД.docx">
       <Link>Resources\Kap\ПОД.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ПОС.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ПОС.docx">
       <Link>Resources\Kap\ПОС.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\СМ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\СМ.docx">
       <Link>Resources\Kap\СМ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\СС.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\СС.docx">
       <Link>Resources\Kap\СС.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ТБЭ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ТБЭ.docx">
       <Link>Resources\Kap\ТБЭ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ТХ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ТХ.docx">
       <Link>Resources\Kap\ТХ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ЭОМ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ЭОМ.docx">
       <Link>Resources\Kap\ЭОМ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Kap\ЭЭ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\kap\ЭЭ.docx">
       <Link>Resources\Kap\ЭЭ.docx</Link>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ИЛО.docx">
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ИЛО.docx">
       <Link>Resources\Lin\ИЛО.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ООС.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ООС.docx">
       <Link>Resources\Lin\ООС.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ПБ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ПБ.docx">
       <Link>Resources\Lin\ПБ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ПЗ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ПЗ.docx">
       <Link>Resources\Lin\ПЗ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ПОД.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ПОД.docx">
       <Link>Resources\Lin\ПОД.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ПОС.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ПОС.docx">
       <Link>Resources\Lin\ПОС.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ППО.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ППО.docx">
       <Link>Resources\Lin\ППО.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\СМ.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\СМ.docx">
       <Link>Resources\Lin\СМ.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ТКР %28автомобильные дороги%29.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ТКР %28автомобильные дороги%29.docx">
       <Link>Resources\Lin\ТКР %28автомобильные дороги%29.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ТКР %28железные дороги%29.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ТКР %28железные дороги%29.docx">
       <Link>Resources\Lin\ТКР %28железные дороги%29.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ТКР %28линии связи%29.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ТКР %28линии связи%29.docx">
       <Link>Resources\Lin\ТКР %28линии связи%29.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ТКР %28магистральные трубопроводы%29.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ТКР %28магистральные трубопроводы%29.docx">
       <Link>Resources\Lin\ТКР %28магистральные трубопроводы%29.docx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\mpDocTemplates_2013\Resources\Lin\ТКР %28метрополитен%29.docx">
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\mpdoctemplates_2013\resources\lin\ТКР %28метрополитен%29.docx">
       <Link>Resources\Lin\ТКР %28метрополитен%29.docx</Link>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\mpdoctemplates_2013\resources\mpDocTemplates_16x16.png">
+      <Link>Resources\mpDocTemplates_16x16.png</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\mpdoctemplates_2013\resources\mpDocTemplates_16x16_dark.png">
+      <Link>Resources\mpDocTemplates_16x16_dark.png</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\mpdoctemplates_2013\resources\mpDocTemplates_32x32.png">
+      <Link>Resources\mpDocTemplates_32x32.png</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\mpdoctemplates_2013\resources\mpDocTemplates_32x32_dark.png">
+      <Link>Resources\mpDocTemplates_32x32_dark.png</Link>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Page Include="..\mpDocTemplates_2013\ExportProgressDialog.xaml">
@@ -202,20 +268,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="..\mpDocTemplates_2013\Resources\mpDocTemplates_16x16.png">
-      <Link>Resources\mpDocTemplates_16x16.png</Link>
-    </Resource>
-    <Resource Include="..\mpDocTemplates_2013\Resources\mpDocTemplates_16x16_dark.png">
-      <Link>Resources\mpDocTemplates_16x16_dark.png</Link>
-    </Resource>
-    <Resource Include="..\mpDocTemplates_2013\Resources\mpDocTemplates_32x32.png">
-      <Link>Resources\mpDocTemplates_32x32.png</Link>
-    </Resource>
-    <Resource Include="..\mpDocTemplates_2013\Resources\mpDocTemplates_32x32_dark.png">
-      <Link>Resources\mpDocTemplates_32x32_dark.png</Link>
-    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

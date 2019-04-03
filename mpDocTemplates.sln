@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpDocTemplates_2013", "mpDocTemplates_2013\mpDocTemplates_2013.csproj", "{52806EB9-A3B5-483C-8A78-7FAF12340529}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpDocTemplates_2018", "mpDocTemplates_2018\mpDocTemplates_2018.csproj", "{6B9A1F4B-C406-45D4-857A-4F5142573EA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpDocTemplates_2019", "mpDocTemplates_2019\mpDocTemplates_2019.csproj", "{F7D34DB3-69E2-4677-8AB7-30FABE4A4AA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mpDocTemplates_2020", "mpDocTemplates_2020\mpDocTemplates_2020.csproj", "{C4A12D9E-EF52-4A4F-9566-08932D26601C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{F7D34DB3-69E2-4677-8AB7-30FABE4A4AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7D34DB3-69E2-4677-8AB7-30FABE4A4AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7D34DB3-69E2-4677-8AB7-30FABE4A4AA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A12D9E-EF52-4A4F-9566-08932D26601C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A12D9E-EF52-4A4F-9566-08932D26601C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A12D9E-EF52-4A4F-9566-08932D26601C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A12D9E-EF52-4A4F-9566-08932D26601C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

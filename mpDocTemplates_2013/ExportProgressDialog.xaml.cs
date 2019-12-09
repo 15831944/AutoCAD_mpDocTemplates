@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
-using System.Globalization;
-using System.Windows;
-
-namespace mpDocTemplates
+﻿namespace mpDocTemplates
 {
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.Windows;
+
     public partial class ExportProgressDialog
     {
         private const string LangItem = "mpDocTemplates";
@@ -22,19 +22,22 @@ namespace mpDocTemplates
             _backgroundWorker.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
         }
 
-        void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Close();
         }
 
-        void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             // Если значение процентов = 0, значит не показываем текст с процентами
             TbProgress.Visibility = e.ProgressPercentage == -1 ? Visibility.Collapsed : Visibility.Visible;
+
             // Процент
             ProgressBar.Value = e.ProgressPercentage;
+
             // Процент в виде текста
             TbProgress.Text = e.ProgressPercentage.ToString(CultureInfo.InvariantCulture) + "%";
+
             // Что сейчас делаем
             TbCurrentWorkLabel.Text = e.UserState as string;
         }

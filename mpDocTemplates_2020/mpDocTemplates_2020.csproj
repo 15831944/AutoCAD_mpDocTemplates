@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(SolutionDir)\ModPlus.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
       <HintPath>C:\_Acad dlls\2020\accoremgd.dll</HintPath>
@@ -60,8 +63,13 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\mpDocTemplates_2013\AcadFunction.cs">
+      <Link>AcadFunction.cs</Link>
+    </Compile>
     <Compile Include="..\mpDocTemplates_2013\ExportProgressDialog.xaml.cs">
       <Link>ExportProgressDialog.xaml.cs</Link>
       <DependentUpon>ExportProgressDialog.xaml</DependentUpon>
@@ -75,6 +83,12 @@
     </Compile>
     <Compile Include="..\mpDocTemplates_2013\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\mpDocTemplates_2013\TemplateData.cs">
+      <Link>TemplateData.cs</Link>
+    </Compile>
+    <Compile Include="..\mpDocTemplates_2013\TemplateItem.cs">
+      <Link>TemplateItem.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

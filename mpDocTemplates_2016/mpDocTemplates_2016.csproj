@@ -29,6 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(SolutionDir)\ModPlus.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
       <HintPath>C:\_Acad dlls\2016\accoremgd.dll</HintPath>
@@ -66,6 +69,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\mpDocTemplates_2013\AcadFunction.cs">
+      <Link>AcadFunction.cs</Link>
+    </Compile>
     <Compile Include="..\mpDocTemplates_2013\ExportProgressDialog.xaml.cs">
       <Link>ExportProgressDialog.xaml.cs</Link>
       <DependentUpon>ExportProgressDialog.xaml</DependentUpon>
@@ -79,6 +85,12 @@
     </Compile>
     <Compile Include="..\mpDocTemplates_2013\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\mpDocTemplates_2013\TemplateData.cs">
+      <Link>TemplateData.cs</Link>
+    </Compile>
+    <Compile Include="..\mpDocTemplates_2013\TemplateItem.cs">
+      <Link>TemplateItem.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +218,13 @@
     <Resource Include="..\mpDocTemplates_2013\Resources\mpDocTemplates_32x32_dark.png">
       <Link>Resources\mpDocTemplates_32x32_dark.png</Link>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

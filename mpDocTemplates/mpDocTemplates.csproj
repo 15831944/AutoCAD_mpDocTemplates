@@ -20,11 +20,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;A2020</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;A2021</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <AssemblyName>$(AssemblyName)_2020</AssemblyName>
+    <AssemblyName>$(AssemblyName)_2021</AssemblyName>
   </PropertyGroup>
   <!-- For AutoCAD versions -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2013|x64'">
@@ -74,6 +74,12 @@
     <DefineConstants>TRACE;A2020</DefineConstants>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <AssemblyName>$(AssemblyName)_2020</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'A2021|x64'">
+    <OutputPath>bin\x64\A2021\</OutputPath>
+    <DefineConstants>TRACE;A2021</DefineConstants>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <AssemblyName>$(AssemblyName)_2021</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -167,7 +173,7 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
         <PackageReference Include="ModPlus.AutoCAD.Module.2013">
-          <Version>4.2.9.1</Version>
+          <Version>4.3.0.0</Version>
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
@@ -179,7 +185,7 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
         <PackageReference Include="ModPlus.AutoCAD.Module.2014">
-          <Version>4.2.9.1</Version>
+          <Version>4.3.0.0</Version>
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
@@ -203,7 +209,7 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
         <PackageReference Include="ModPlus.AutoCAD.Module.2016">
-          <Version>4.2.9.1</Version>
+          <Version>4.3.0.0</Version>
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
@@ -215,7 +221,7 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
         <PackageReference Include="ModPlus.AutoCAD.Module.2017">
-          <Version>4.2.9.1</Version>
+          <Version>4.3.0.0</Version>
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
@@ -227,7 +233,7 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
         <PackageReference Include="ModPlus.AutoCAD.Module.2018">
-          <Version>4.2.9.1</Version>
+          <Version>4.3.0.0</Version>
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
@@ -239,19 +245,31 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
         <PackageReference Include="ModPlus.AutoCAD.Module.2019">
-          <Version>4.2.9.1</Version>
+          <Version>4.3.0.0</Version>
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
     </When>
-    <When Condition=" '$(Configuration)'=='A2020' or '$(Configuration)'=='Debug' ">
+    <When Condition=" '$(Configuration)'=='A2020' ">
       <ItemGroup>
         <PackageReference Include="ModPlus.AutoCAD.API.2020">
           <Version>1.0.0</Version>
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
         <PackageReference Include="ModPlus.AutoCAD.Module.2020">
-          <Version>4.2.9.1</Version>
+          <Version>4.3.0.0</Version>
+          <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+      </ItemGroup>
+    </When>
+    <When Condition=" '$(Configuration)'=='A2021' or '$(Configuration)'=='Debug' ">
+      <ItemGroup>
+        <PackageReference Include="ModPlus.AutoCAD.API.2021">
+          <Version>1.0.0</Version>
+          <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="ModPlus.AutoCAD.Module.2021">
+          <Version>4.3.0.0</Version>
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
@@ -263,7 +281,7 @@
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="ModPlusAPI">
-      <Version>1.5.0</Version>
+      <Version>1.6.0</Version>
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="ModPlusStyle">
